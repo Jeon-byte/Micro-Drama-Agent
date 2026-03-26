@@ -1,0 +1,50 @@
+# Python cache and notebooks
+__pycache__/
+*.py[cod]
+*.pyo
+.ipynb_checkpoints/
+
+# Local env and logs
+.env
+.venv/
+venv/
+*.log
+
+# Generated outputs and caches
+Results/
+image_cache/
+image_info_cache/
+show/
+movie_agent/terminal.log
+
+# Model weights, checkpoints, and local model caches
+movie_agent/weight/
+movie_agent/checkpoints/
+movie_agent/models/hf_home/
+movie_agent/models/dinov2/
+movie_agent/models/*/checkpoints/
+FreeGraftor/FreeGraftor/models/
+microdrama_agent/weight/
+microdrama_agent/checkpoints/
+microdrama_agent/whisper/
+microdrama_agent/models/hf_home/
+microdrama_agent/models/dinov2/
+microdrama_agent/models/FLUX.1-dev/
+microdrama_agent/models/grounding-dino-tiny/
+microdrama_agent/models/*/checkpoints/
+microdrama_agent/models/sam_vit_h_4b8939.pth
+microdrama_agent/models/sam_vit_h_4b8939.pth.1
+
+# Build artifacts
+imgutils-main/build/
+imgutils-main/*.egg-info/
+
+# Generated media artifacts
+*.mp4
+
+# Large third-party and generated subdirectories
+FreeGraftor/FreeGraftor/inference_results/
+FreeGraftor/FreeGraftor/character_bank/
+imgutils-main/docs/
+imgutils-main/test/
+imgutils-main/zoo/

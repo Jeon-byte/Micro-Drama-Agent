@@ -1,0 +1,4 @@
+{
+    "pretrained_roictrl": "./weight/MovieAgent-ROICtrl-Frozen/FrozenII/combined_model_base",
+    "roictrl_path": "./weight/ROICtrl_sdv14_30K/ROICtrl_sdv14_30K.safetensors"
+}
