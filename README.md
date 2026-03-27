@@ -43,20 +43,16 @@ Character reference example:
 Generated examples:
 
 <p align="center">
-  <img src="show/b2.png" alt="Demo image 1" width="45%" />
-  <img src="show/b3.png" alt="Demo image 2" width="45%" />
+  <img src="show/b2.png" alt="Demo image 1" width="30%" />
+  <img src="show/b3.png" alt="Demo image 2" width="30%" />
+  <img src="show/highinfer_lowtxtcfg_Sub-Script_1Scene_1Shot_1.gif" alt="Shot Demo 1" width="30%" />
 </p>
 
 ### Video Demos
-
 <p align="center">
-  <img src="show/highinfer_lowtxtcfg_Sub-Script_1Scene_1Shot_1.gif" alt="Shot Demo 1" width="30%" />
-  <img src="show/Sub-Script_5Scene_4Shot_2.gif" alt="Shot Demo 2" width="30%" />
-  <img src="show/Sub-Script_5_Scene_3_Shot_2.gif" alt="Shot Demo 3" width="30%" />
-</p>
-
-<p align="center">
-  <img src="show/Sub-Script_1Scene_1Shot_1.gif" alt="Shot Demo 4" width="48%" />
+  
+  <img src="show/Sub-Script_5Scene_4Shot_2.gif" alt="Shot Demo 2" width="45%" />
+  <img src="show/Sub-Script_5_Scene_3_Shot_2.gif" alt="Shot Demo 3" width="45%" />
 </p>
 
 ## Repository Structure
