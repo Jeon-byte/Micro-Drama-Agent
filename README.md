@@ -49,9 +49,15 @@ Generated examples:
 
 ### Video Demos
 
-- [Shot Demo 1](show/highinfer_lowtxtcfg_Sub-Script_1Scene_1Shot_1.gif)
-- [Shot Demo 2](show/Sub-Script_5Scene_4Shot_2.gif)
-- [Shot Demo 3](show/Sub-Script_5_Scene_3_Shot_2.gif)
+<p align="center">
+  <img src="show/highinfer_lowtxtcfg_Sub-Script_1Scene_1Shot_1.gif" alt="Shot Demo 1" width="30%" />
+  <img src="show/Sub-Script_5Scene_4Shot_2.gif" alt="Shot Demo 2" width="30%" />
+  <img src="show/Sub-Script_5_Scene_3_Shot_2.gif" alt="Shot Demo 3" width="30%" />
+</p>
+
+<p align="center">
+  <img src="show/Sub-Script_1Scene_1Shot_1.gif" alt="Shot Demo 4" width="48%" />
+</p>
 
 ## Repository Structure
 
