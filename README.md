@@ -52,7 +52,7 @@ Generated examples:
 - [Shot Demo 1](show/Sub-Script_5_Scene_3_Shot_2.mp4)
 - [Shot Demo 2](show/Sub-Script_5Scene_4Shot_2.mp4)
 - [Shot Demo 3](show/Sub-Script_1Scene_1Shot_1.mp4.mp4)
-- [Shot Demo 4](show/%E9%AB%98infer,%E4%BD%8EtxtcfgSub-Script_1Scene_1Shot_1.mp4)
+- [Shot Demo 4](show/高infer,低txtcfgSub-Script_1Scene_1Shot_1.mp4)
 
 ## Repository Structure
 

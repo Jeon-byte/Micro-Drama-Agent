@@ -14,7 +14,6 @@ venv/
 Results/
 image_cache/
 image_info_cache/
-show/
 movie_agent/terminal.log
 
 # Model weights, checkpoints, and local model caches
@@ -39,8 +38,7 @@ microdrama_agent/models/sam_vit_h_4b8939.pth.1
 imgutils-main/build/
 imgutils-main/*.egg-info/
 
-# Generated media artifacts
-*.mp4
+
 
 # Large third-party and generated subdirectories
 FreeGraftor/FreeGraftor/inference_results/
