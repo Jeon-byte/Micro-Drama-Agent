@@ -11,7 +11,7 @@ This repository focuses on the current working codebase and demo assets for the 
 - Character-consistent generation with CharacterBank support.
 - Multiple image generation backends, including `InstantCharacter` and `CharaConsist`.
 - Multiple image-to-video backends, including `CogVideoX`, `I2Vgen`, `SVD`, and `HunyuanVideo_I2V`.
-- Demo materials included in [`show/`](show).
+
 
 ## Pipeline Overview
 
@@ -49,10 +49,9 @@ Generated examples:
 
 ### Video Demos
 
-- [Shot Demo 1](show/Sub-Script_5_Scene_3_Shot_2.mp4)
-- [Shot Demo 2](show/Sub-Script_5Scene_4Shot_2.mp4)
-- [Shot Demo 3](show/Sub-Script_1Scene_1Shot_1.mp4.mp4)
-- [Shot Demo 4](show/高infer,低txtcfgSub-Script_1Scene_1Shot_1.mp4)
+- [Shot Demo 1](show/highinfer_lowtxtcfg_Sub-Script_1Scene_1Shot_1.gif)
+- [Shot Demo 2](show/Sub-Script_5Scene_4Shot_2.gif)
+- [Shot Demo 3](show/Sub-Script_5_Scene_3_Shot_2.gif)
 
 ## Repository Structure
 
