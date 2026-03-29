@@ -37,6 +37,7 @@ The project is designed as a staged agent workflow:
 Character reference example:
 
 <p align="center">
+  <img src="show/identity_front.png" alt="Character identity example" width="280" />
   <img src="show/identity.png" alt="Character identity example" width="280" />
 </p>
 
@@ -45,10 +46,13 @@ Generated examples:
 <p align="center">
   <img src="show/b2.png" alt="Demo image 1" width="30%" />
   <img src="show/b3.png" alt="Demo image 2" width="30%" />
-  <img src="show/highinfer_lowtxtcfg_Sub-Script_1Scene_1Shot_1.gif" alt="Shot Demo 1" width="30%" />
-</p>
+  <img src="show/l1.png" alt="Demo image 2" width="30%" />
 
-### Video Demos
+</p>
+<p align="center">
+  <img src="show/highinfer_lowtxtcfg_Sub-Script_1Scene_1Shot_1.gif" alt="Shot Demo 1" width="90%" />
+</p>
+###Other Video Demos 
 <p align="center">
   
   <img src="show/Sub-Script_5Scene_4Shot_2.gif" alt="Shot Demo 2" width="45%" />

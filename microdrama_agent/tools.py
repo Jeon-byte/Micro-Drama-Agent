@@ -2,6 +2,7 @@ import sys
 import os
 import json
 
+import torch
 from tqdm import tqdm
 
 
@@ -272,6 +273,21 @@ class ToolCalling:
         if self.image2video is None:
             self.image2video = Image2VideoModel(self.args, self._image2video_name)
 
+    def _release_image2video(self):
+        """Unload I2V (e.g. HunyuanVideo) before the next T2I pass.
+
+        Without this, shot 2+ can load InstantCharacter while Hunyuan is still resident → OOM / SIGKILL.
+        """
+        if self.image2video is None:
+            return
+        try:
+            pred = getattr(self.image2video, "predictor", None)
+            if pred is not None and callable(getattr(pred, "release_pipe", None)):
+                pred.release_pipe()
+        except Exception as e:
+            print(f"[MovieAgent][WARN] failed to release I2V before T2I: {e}")
+        self.image2video = None
+
     def _crop_bbox_pil(self, img, bbox, *, pad=0.08):
         """Crop bbox region from PIL image.
 
@@ -496,6 +512,9 @@ class ToolCalling:
             threshold = float(getattr(self.args, "consistency_threshold", 0.55) or 0.0)
             pad = float(getattr(self.args, "consistency_bbox_pad", 0.08) or 0.0)
 
+            # Do not keep Hunyuan (or other I2V) on GPU while loading/running Flux T2I.
+            self._release_image2video()
+
             attempt = 0
             while True:
                 prompt, _content = self.gen.predict(prompt, refer_path, character_box, save_path, size)
@@ -531,6 +550,16 @@ class ToolCalling:
                 release_fn()
         except Exception as e:
             print(f"[MovieAgent][WARN] failed to release T2I pipeline before I2V: {e}")
+
+        try:
+            import gc
+
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.synchronize()
+                torch.cuda.empty_cache()
+        except Exception:
+            pass
 
         self._ensure_image2video()
         base, _ext = os.path.splitext(save_path)

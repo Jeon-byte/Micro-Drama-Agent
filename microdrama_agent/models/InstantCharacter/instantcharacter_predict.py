@@ -339,39 +339,36 @@ class InstantCharacterPredictor:
             return None
 
         device = pipe._execution_device
+        if isinstance(device, str):
+            device = torch.device(device)
         dtype = pipe.transformer.dtype
 
         img = Image.open(str(p)).convert("RGB")
         img = img.resize((max(img.size), max(img.size)))
         img_embeds = pipe.encode_image_emb(img, device, dtype)
 
-        # If projector is kept on CPU, move it to GPU just for this forward.
+        # Projector may be partially on CPU when using sequential_cpu_offload + CPU init:
+        # checking only next(proj.parameters()) misses LayerNorm weights still on CPU.
+        # Always move the full module tree to the execution device for this forward.
         proj = pipe.subject_image_proj_model
         keep_proj_cpu = os.getenv("INSTANTCHAR_PROJECTOR_CPU", "0") not in ("0", "false", "False")
-        moved = False
-        if keep_proj_cpu:
-            try:
-                if next(proj.parameters()).device.type != "cuda":
-                    proj.to(device)
-                    moved = True
-            except Exception:
-                pass
 
-        ip = proj(
-            low_res_shallow=img_embeds['image_embeds_low_res_shallow'],
-            low_res_deep=img_embeds['image_embeds_low_res_deep'],
-            high_res_deep=img_embeds['image_embeds_high_res_deep'],
-            timesteps=timestep.to(dtype=dtype),
-            need_temb=True,
-        )[0]
-
-        if keep_proj_cpu and moved:
-            try:
-                proj.to(torch.device("cpu"))
-                # reduce fragmentation
-                torch.cuda.empty_cache()
-            except Exception:
-                pass
+        proj.to(device)
+        try:
+            ip = proj(
+                low_res_shallow=img_embeds['image_embeds_low_res_shallow'],
+                low_res_deep=img_embeds['image_embeds_low_res_deep'],
+                high_res_deep=img_embeds['image_embeds_high_res_deep'],
+                timesteps=timestep.to(device=device, dtype=dtype),
+                need_temb=True,
+            )[0]
+        finally:
+            if keep_proj_cpu:
+                try:
+                    proj.to(torch.device("cpu"))
+                    torch.cuda.empty_cache()
+                except Exception:
+                    pass
 
         # keep on GPU for speed. If OOM, user can disable caching or implement CPU caching later.
         if not disable_cache:

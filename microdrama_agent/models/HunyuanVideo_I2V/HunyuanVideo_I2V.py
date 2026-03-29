@@ -75,6 +75,45 @@ class HunyuanVideo_I2V_pipe:
                 except Exception as e:
                     logger.warning(f"[Hunyuan I2V] enable_vae_tiling() failed: {e}")
 
+    def release_pipe(self):
+        """Drop HunyuanVideo sampler + pipeline so T2I (e.g. InstantCharacter/Flux) can use VRAM alone.
+
+        MovieAgent may run many shots: without this, the I2V model stays loaded while the next keyframe
+        is generated, doubling GPU memory and often causing OOM (or Linux OOM-killer, exit 137).
+        """
+        import gc
+
+        sampler = getattr(self, "hunyuan_video_sampler", None)
+        self.hunyuan_video_sampler = None
+        if sampler is not None:
+            try:
+                pipe = getattr(sampler, "pipeline", None)
+                if pipe is not None:
+                    try:
+                        pipe.to("cpu")
+                    except Exception:
+                        pass
+            except Exception:
+                pass
+            try:
+                del sampler
+            except Exception:
+                pass
+
+        try:
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.synchronize()
+                torch.cuda.empty_cache()
+                try:
+                    torch.cuda.ipc_collect()
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
+        logger.info("[Hunyuan I2V] released pipeline (freed VRAM for image generation)")
+
     def predict(self, prompt, image_path, video_save_path, size = (569, 320)):
         
         self.args.prompt = prompt
